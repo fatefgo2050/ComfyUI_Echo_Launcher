@@ -30,3 +30,6 @@ Desktop.ini
 # ---- 发布附件（只作 GitHub Release 附件，不入源码库）----
 *.zip
 *.sha256
+
+# 内部文档（不入公开仓库）
+交付文档.md
