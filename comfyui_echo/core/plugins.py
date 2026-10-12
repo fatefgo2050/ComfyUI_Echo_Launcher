@@ -5,7 +5,7 @@ ComfyUI 原生就会跳过它 —— 不需要把插件搬到 `custom_nodes_disa
 也不需要 ComfyUI-Manager 配合。Git 操作全部走 Echo 的便携 Git（`plugin.gitops`），
 没装系统 Git 的机器也能 clone / fetch / 切版本。
 
-对 Echo 的两处修正（已在 README 记录）：
+对上游实现的两处修正：
 1. Echo 的 `mode.apply_mode()` 处理**单文件插件**时算错目标名
    （`foo.disabled.py` 启用后会变成 `foo.disabled`，丢掉 `.py`），这里在
    `set_enabled()` 里按 `foo.py` / `foo.disabled.py` 正确换算。

@@ -12,7 +12,7 @@
     dist\\resources\\                 外置资源（便携 Git + 图标）
     dist\\build-report.xml           仅 Nuitka：本次构建打进了哪些模块（排查用）
 
-为什么 resources 要外置（README 的结论，对两种工具都成立）
+为什么 resources 要外置（对两种打包工具都成立）
 ----------------------------------------------------------
 便携 Git 有 68 MB / 328 个文件，其中 155 个是 .exe/.dll。冻结器的
 ``--include-data-dir`` / ``--add-data`` 对二进制的处理都不可靠（Nuitka 实测
@@ -27,13 +27,13 @@
 
 关于 --tool nuitka
 ------------------
-README 原本写的是 Nuitka 路线，代码里的冻结态注释也是按 Nuitka 4.2.2 写的。
+早期方案走的是 Nuitka 路线，代码里的冻结态注释也是按 Nuitka 4.2.2 写的。
 但本机环境中 **Nuitka 走不通**：Python 3.13 起 Nuitka 禁用 MinGW64，必须用
 MSVC；而 MSVC 的 SDK 定位链（Nuitka → SCons → vcvarsall.bat → reg.exe）
 要调用 ``reg.exe``，该程序被 WorkBuddy 安全策略列为**不可绕过的黑名单**，
 于是 SCons 拿不到 Windows SDK 版本，报 ``CC is not set`` 而失败。
 PyInstaller 不需要任何 C 编译器，因此作为默认工具；解除 reg.exe 限制后
-可用 ``--tool nuitka`` 回到 README 的原始路线。
+可用 ``--tool nuitka`` 回到 Nuitka 路线。
 """
 from __future__ import annotations
 
