@@ -1,20 +1,25 @@
 <div align="center">
-
-<img src="resources/echo_logo.png" width="104" alt="ComfyUI Echo">
-
-# ComfyUI Echo 启动器
-
-**纯本地运行的 ComfyUI 管理面板**
-
-把 启动 · 插件 · 工作流 · 模型 · 媒体 · 内核版本 收进一个窗口
-
-[⬇ 下载免安装包](https://github.com/fatefgo2050/ComfyUI_Echo_Launcher/releases) &nbsp;·&nbsp; [主要功能](#主要功能) &nbsp;·&nbsp; [从源码运行](#从源码运行) &nbsp;·&nbsp; [目录结构](#目录结构)
-
-![platform](https://img.shields.io/badge/平台-Windows%2010%20%2F%2011-0078D4?logo=windows&logoColor=white)
-![python](https://img.shields.io/badge/Python-3.13-3776AB?logo=python&logoColor=white)
-![version](https://img.shields.io/badge/版本-v0.1.0-1f6c9f)
-![runtime](https://img.shields.io/badge/运行-解压即用%20·%20免装%20Python-346538)
-
+  <img src="resources/echo_logo.png" width="104" alt="ComfyUI Echo">
+  <h1>ComfyUI Echo 启动器</h1>
+  <p>
+    <strong>纯本地运行的 ComfyUI 管理面板</strong><br>
+    把 启动 · 插件 · 工作流 · 模型 · 媒体 · 内核版本 收进一个窗口
+  </p>
+  <p>
+    <a href="https://github.com/fatefgo2050/ComfyUI_Echo_Launcher/releases">下载免安装包</a>
+    &nbsp;·&nbsp;
+    <a href="#主要功能">主要功能</a>
+    &nbsp;·&nbsp;
+    <a href="#从源码运行">从源码运行</a>
+    &nbsp;·&nbsp;
+    <a href="#目录结构">目录结构</a>
+  </p>
+  <p>
+    <img src="https://img.shields.io/badge/%E5%B9%B3%E5%8F%B0-Windows%2010%20%2F%2011-0078D4?logo=windows&logoColor=white" alt="platform">
+    <img src="https://img.shields.io/badge/Python-3.13-3776AB?logo=python&logoColor=white" alt="python">
+    <img src="https://img.shields.io/badge/%E7%89%88%E6%9C%AC-v0.1.0-1f6c9f" alt="version">
+    <img src="https://img.shields.io/badge/%E8%BF%90%E8%A1%8C-%E8%A7%A3%E5%8E%8B%E5%8D%B3%E7%94%A8%20%C2%B7%20%E5%85%8D%E8%A3%85%20Python-346538" alt="runtime">
+  </p>
 </div>
 
 ---
@@ -28,9 +33,11 @@
 启动参数可视化、插件与内核的安装更新、模型与媒体的浏览整理 —— 全部**在本机完成**，
 不依赖任何私有服务端。
 
+<br>
+
 <div align="center">
-<img src="docs/screenshots/home.png" width="900" alt="启动页">
-<br><em>启动 —— 多包路径 · 启动参数 · 注意力四档 · 实时控制台</em>
+  <img src="docs/screenshots/home.png" width="900" alt="启动页">
+  <br><em>启动 —— 多包路径 · 启动参数 · 注意力四档 · 实时控制台</em>
 </div>
 
 ## 主要功能
@@ -49,19 +56,21 @@
 | 系统 | 设置 | 自更新仓库 / Token / 托盘 / 通知 |
 | 系统 | 关于 | 软件介绍与版本更新 |
 
+<br>
+
 <div align="center">
-<img src="docs/screenshots/modes.png" width="900" alt="模式页">
-<br><em>模式 —— 工作流 / 插件 / 当前模式一屏三栏，选工作流即知缺哪些插件</em>
+  <img src="docs/screenshots/modes.png" width="900" alt="模式页">
+  <br><em>模式 —— 工作流 / 插件 / 当前模式一屏三栏，选工作流即知缺哪些插件</em>
 </div>
 
 <div align="center">
-<img src="docs/screenshots/market.png" width="900" alt="市场页">
-<br><em>市场 —— ComfyUI-Manager 公开目录，边打边过滤、按节点名反查</em>
+  <img src="docs/screenshots/market.png" width="900" alt="市场页">
+  <br><em>市场 —— ComfyUI-Manager 公开目录，边打边过滤、按节点名反查</em>
 </div>
 
 <div align="center">
-<img src="docs/screenshots/settings.png" width="900" alt="设置页">
-<br><em>设置 —— 自更新 / 网络 / 界面与系统偏好，改动即时保存</em>
+  <img src="docs/screenshots/settings.png" width="900" alt="设置页">
+  <br><em>设置 —— 自更新 / 网络 / 界面与系统偏好，改动即时保存</em>
 </div>
 
 ## 下载
