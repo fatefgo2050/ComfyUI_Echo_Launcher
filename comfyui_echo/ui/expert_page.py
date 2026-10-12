@@ -11,7 +11,7 @@
   拼装在 `core/process.LaunchOptions.build_args()`，改动后调 `_sync_home_preview()`
   让「启动」页的命令预览实时跟上。
 - 每个控件的 tooltip 都是对应的命令行开关（对照
-  `D:\\ComfyUI\\ComfyUI\\comfy\\cli_args.py` 核对过；fp8 系列是下划线）。
+  `comfy/cli_args.py` 核对过；fp8 系列是下划线）。
 - 注意力档位 / 检测 CK / 强制接管 shim 原在「环境」页，2026-10-09 按用户要求
   搬到本页；配置键不变（attention_mode / sage_attention / attention_shim_enabled），
   CK 实测结果仍存 `ctx.ck_ok/ck_text`，「启动」页启动前的实测直接复用。

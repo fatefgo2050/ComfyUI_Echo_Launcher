@@ -2,7 +2,7 @@
 
 支持两种目录布局（UI 只要求「选一个有效目录」，两种都认）：
 
-A. **便携包根目录**（ComfyUI 官方 Windows 包 / 本机 D:\\ComfyUI 那种）
+A. **便携包根目录**（ComfyUI 官方 Windows 包那种）
        <root>/python_embeded/python.exe
        <root>/ComfyUI/main.py
 B. **直连 ComfyUI 本体目录**（Echo 的 comfyui_path 语义）

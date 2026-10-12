@@ -9,7 +9,7 @@
 
 shim 接管（`echo_launcher.core.attn_shim`）：有些便携包把注意力后端写死在
 解释器里，启动参数不生效；shim 在 `sitecustomize.py` 阶段改写 `sys.argv`，
-比 ComfyUI 读参数更早。与外部 `ComfyUI_attswitch` 工具共用同一标记。
+比 ComfyUI 读参数更早。与外部同类小工具共用同一标记。
 """
 from __future__ import annotations
 

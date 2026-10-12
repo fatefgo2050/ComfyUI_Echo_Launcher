@@ -9,7 +9,7 @@
   · 双击 `run_nvidia_gpu.bat` / `run_cpu.bat`
   · 任何手工 `python main.py ...`
 
-这时本启动器拼的参数根本到不了。shim 思路来自 `D:\\ComfyUI_attswitch`：
+这时本启动器拼的参数根本到不了。shim 思路来自一个「注意力切换」小工具：
 
     <ComfyUI 便携根>\\python_embeded\\Lib\\site-packages\\sitecustomize.py
     <ComfyUI 便携根>\\.attn_mode            ← 模式标记（sage / ck / 不存在=不接管）
@@ -51,7 +51,7 @@ if hasattr(subprocess, "CREATE_NO_WINDOW"):
 
 
 # --------------------------------------------------------------------------
-# 内嵌 shim 源码（与 D:\ComfyUI_attswitch\shim\sitecustomize.py 完全一致）
+# 内嵌 shim 源码（与该工具里的 sitecustomize.py 完全一致）
 # 这样它一定随本包分发，不依赖任何外部文件。
 # --------------------------------------------------------------------------
 SHIM_TEMPLATE = r'''# -*- coding: utf-8 -*-
@@ -385,8 +385,8 @@ def comfyui_root_of(cfg) -> str:
 
 
 def resolve_portable_root(comfyui_path: str) -> str:
-    """本启动器把 comfyui_path 记成「含 main.py 的那一层」（如 D:/ComfyUI/ComfyUI），
-    而 shim 要装在「便携根目录」（python_embeded 与 ComfyUI 同级的上一层，如 D:/ComfyUI）。
+    """本启动器把 comfyui_path 记成「含 main.py 的那一层」（如 <便携根>/ComfyUI），
+    而 shim 要装在「便携根目录」（python_embeded 与 ComfyUI 同级的上一层，如 <便携根>）。
 
     这里向上找一层，返回能通过 looks_like_root 校验的便携根目录；找不到返回 ""。
     """

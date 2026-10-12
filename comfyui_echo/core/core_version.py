@@ -11,7 +11,7 @@
 
 两个实测结论（决定了这里怎么写）
 --------------------------------
-1. 本机 `D:\\ComfyUI\\ComfyUI` 是**浅克隆**（有 `.git/shallow`，只能列 ~280 条提交）。
+1. 目标 `ComfyUI/` 是**浅克隆**（有 `.git/shallow`，只能列 ~280 条提交）。
    `git fetch --prune --tags origin master` 一次 3.8 s 就能把 origin/master 从
    d91ed5f5 推到 926d828e 并且可列条目不变（仍 280 条）——够用了，
    **不需要 `--unshallow`**（那是几百 MB 的全量历史，纯粹浪费）。

@@ -30,7 +30,7 @@
 早期方案走的是 Nuitka 路线，代码里的冻结态注释也是按 Nuitka 4.2.2 写的。
 但本机环境中 **Nuitka 走不通**：Python 3.13 起 Nuitka 禁用 MinGW64，必须用
 MSVC；而 MSVC 的 SDK 定位链（Nuitka → SCons → vcvarsall.bat → reg.exe）
-要调用 ``reg.exe``，该程序被 WorkBuddy 安全策略列为**不可绕过的黑名单**，
+要调用 ``reg.exe``，该程序被本机安全策略列为**不可绕过的黑名单**，
 于是 SCons 拿不到 Windows SDK 版本，报 ``CC is not set`` 而失败。
 PyInstaller 不需要任何 C 编译器，因此作为默认工具；解除 reg.exe 限制后
 可用 ``--tool nuitka`` 回到 Nuitka 路线。

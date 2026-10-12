@@ -104,7 +104,7 @@ class LaunchOptions:
             args += ["--cuda-device", dev]
 
         ex = l.get("expert") or {}
-        # 复选框组（键 -> 命令行开关；对照 D:\ComfyUI\ComfyUI\comfy\cli_args.py 核对过）
+        # 复选框组（键 -> 命令行开关；对照 `comfy/cli_args.py` 核对过）
         for key, flag in (
             ("enable_manager", "--enable-manager"),
             ("disable_xformers", "--disable-xformers"),
