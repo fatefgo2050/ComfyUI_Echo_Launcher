@@ -75,16 +75,6 @@
   <br><em>专家模式 —— 精度 / 显存 / 日志 / 注意力接管，逐项对应命令行开关</em>
 </div>
 
-<div align="center">
-  <img src="docs/screenshots/settings.png" width="900" alt="设置页">
-  <br><em>设置 —— 自更新 / 网络 / 界面与系统偏好，改动即时保存</em>
-</div>
-
-<div align="center">
-  <img src="docs/screenshots/about.png" width="900" alt="关于页">
-  <br><em>关于 —— 软件介绍与版本更新</em>
-</div>
-
 ## 下载
 
 | 文件 | 说明 |
