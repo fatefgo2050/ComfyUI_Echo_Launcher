@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ComfyUI Echo 的完整 logo（矢量版，2026-10-10 依原图重绘）
+
+  用户的原版 logo = **圆角方块 + 居中的 ECHO 字标**（不是光秃秃的字标）。
+  参考原图：resources/echo_logo.png（256×256 PNG）与 resources/echo_white.ico
+  （同一张图，多一圈浅灰描边，是给 exe 图标用的）。
+
+  量测结果（全部由原图亚像素取边得到，不是眼估）：
+    方块      256×256，圆角半径 54.5（= 边长的 21.3%，由左上角边界点拟合圆得到，残差 ≤0.4px）
+    底色      纯白 #ffffff（原图里没有任何斜纹/水印）
+    描边      #cfd6dc，宽 3.5，环在离边 0.75~4.25 处（只有 ico 那版有，这里照它画上）
+    字标      ink 范围 x22.8~232.4、y94.5~160.5（居中对齐到方块中心）
+              即占方块宽度的 82%
+
+  字标本体的几何见下面 <g> 里的注释；形状全部由基本图元构成
+  （圆头 rect / circle / 圆弧 A），**没有一条折线**，放大到任何倍数都光滑。
+
+  ⚠ 改这里之前先看 comfyui_echo/core/brand.py（色值与尺寸常量的同一份来源）。
+  ⚠ 这是一张正方形 logo，宽高比必须保持 1:1；显示尺寸由 widgets.LogoBadge 控制。
+-->
+<svg xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 0 256 256" width="256" height="256">
+
+  <!--
+    底托拆成**两块**，各带一组标记 —— 因为它们是两件独立的事：
+      TILE-BG     = 白色圆角填充（图标式底托）
+      TILE-BORDER = 那圈浅灰描边（logo 自带的边）
+    用户 2026-10-10 的要求是「去掉白底填充、但保留那圈边」，所以不能整块一起摘。
+    widgets.logo_renderer(frame=) 按形态分别摘：
+      full    = 两块都留（图标场合：托盘）
+      outline = 摘掉填充、留描边（内嵌场合，默认）
+      none    = 两块都摘，只剩字标
+    ⚠ 刻意用注释标记而不是 id：PySide6 没暴露 QSvgRenderer.setElementVisibility。
+  -->
+  <!-- TILE-BG:BEGIN -->
+  <rect x="0" y="0" width="256" height="256" rx="54.5" fill="#ffffff"/>
+  <!-- TILE-BG:END -->
+  <!-- TILE-BORDER:BEGIN -->
+  <rect x="2.5" y="2.5" width="251" height="251" rx="52"
+        fill="none" stroke="#cfd6dc" stroke-width="3.5"/>
+  <!-- TILE-BORDER:END -->
+
+  <!-- ECHO 字标：ink 中心对齐到方块中心 —— 字标本体的 ink 范围是
+       x[0, 209.145]、y[-1.035, 65.035]，中心 (104.57, 32.0)；
+       方块中心 (128, 128)，故平移 (22.8, 95.5)。 -->
+  <g transform="translate(22.8 95.5)">
+    <g fill="#5cb4d8">
+      <!-- E：三根圆头横杠（原图里 E 就是这个「三横」造型，中间那根短 6px） -->
+      <rect x="0" y="2.34" width="48.1" height="14.82" rx="7.41"/>
+      <rect x="0" y="24.61" width="42.4" height="14.82" rx="7.41"/>
+      <rect x="0" y="46.82" width="47.6" height="14.82" rx="7.41"/>
+
+      <!-- C：粗弧 + 圆头端帽。从右上端帽绕到右下端帽，圆心 (77.58,32)、
+           中径 24.375、线宽 14.25；large-arc=1、sweep=0，弧张角约 196°。 -->
+      <path d="M 80.96 7.86 A 24.375 24.375 0 1 0 80.96 56.14"
+            fill="none" stroke="#5cb4d8" stroke-width="14.25"
+            stroke-linecap="round"/>
+
+      <!-- H：两根圆头竖笔 + 一根横杠 -->
+      <rect x="93.3" y="0.47" width="14.4" height="63.06" rx="7.2"/>
+      <rect x="125.8" y="0.47" width="14.4" height="63.06" rx="7.2"/>
+      <rect x="93.3" y="24.87" width="46.9" height="14.26"/>
+
+      <!-- O：粗圆环（比 H 的顶/底各外扩约 1.5px，圆字母的视觉补偿） -->
+      <circle cx="176.11" cy="32" r="25.93"
+              fill="none" stroke="#5cb4d8" stroke-width="14.21"/>
+    </g>
+    <!-- O 中心的橙点 -->
+    <circle cx="176.11" cy="32" r="9.91" fill="#f09858"/>
+  </g>
+</svg>

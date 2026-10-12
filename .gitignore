@@ -1,0 +1,32 @@
+# ---- Python ----
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# ---- 构建产物 ----
+dist/
+build/
+*.spec
+_build_*.py
+
+# ---- 运行期生成的数据（首次运行自动创建，不入库）----
+data/
+logs/
+launcher_config.json
+launcher_config.json.bak
+*.log
+
+# ---- 体积较大的随包二进制（随「免安装 ZIP」分发，不入源码库）----
+resources/git/
+
+# ---- 编辑器 / 系统 ----
+.vscode/
+.idea/
+Thumbs.db
+Desktop.ini
+
+# ---- 发布附件（只作 GitHub Release 附件，不入源码库）----
+*.zip
+*.sha256
