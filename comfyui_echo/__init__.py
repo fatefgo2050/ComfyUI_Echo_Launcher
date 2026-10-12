@@ -1,19 +1,14 @@
-"""ComfyUI Echo 启动器 —— 合并版。
+"""ComfyUI Echo 启动器。
 
-来源
+分层
 ----
-- **界面设计 / 页面结构**：来自「NOBU ComfyUI 启动器」（PySide6），
-  原样落在 `comfyui_echo/ui/`，导入路径保持 `from ..core import ...` 不变。
-- **功能内核**：来自「ComfyUI Echo 启动器」，原样落在 `echo_launcher/`。
+- `comfyui_echo/ui/`    界面与页面结构（PySide6）
+- `comfyui_echo/core/`  适配层：把功能内核包装成 UI 期望的函数签名
+- `echo_launcher/`      功能内核：配置 / 模式 / Git / 节点映射 / 进程 / pip / 媒体 / 模型
 
-分工方式
---------
-`comfyui_echo/core/` 是**适配层**：把 Echo 功能层（配置 / 模式切换 / 插件 Git /
-节点映射 / 进程管理 / pip）包装成 UI 期望的函数签名。因此：
+    UI 页面  ──调用──▶  comfyui_echo.core（适配层）  ──调用──▶  echo_launcher（功能内核）
 
-    UI 页面  ──调用──▶  comfyui_echo.core（适配层）  ──调用──▶  echo_launcher（功能层）
-
-UI 文件无需改动 import，换后端只动适配层即可。
+UI 文件不改 import；换后端只动适配层即可。
 """
 import os
 

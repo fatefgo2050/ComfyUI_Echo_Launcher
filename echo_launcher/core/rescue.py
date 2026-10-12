@@ -4,7 +4,7 @@
   1. 插件目录（文件级备份）
   2. Python 环境快照（pip freeze）
 
-原版把它做成 VIP 功能，这里全部免费开放。
+同类工具常把它做成付费功能，这里全部免费开放。
 """
 from __future__ import annotations
 

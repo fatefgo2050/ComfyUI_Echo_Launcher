@@ -176,7 +176,7 @@ class _LogPump(QObject):
     """Echo 的 QueueHandler 用的是**阻塞式** `queue.put`。
 
     队列容量 5000，没有消费者时任何写日志的线程都会永久卡住（死锁）。
-    tkinter 版由 `MainWindow._bg_poll()` 定时抽干；Qt 版必须有对应角色，
+    旧界面版靠定时器抽干队列；Qt 版必须有对应角色，
     所以这里用 QTimer 常驻抽干，并把每条日志转成信号。
     """
 

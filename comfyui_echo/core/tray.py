@@ -1,6 +1,6 @@
 """系统托盘 + Windows 通知（Qt 版）。
 
-Echo 的 `ui/tray.py` 用 `root.after(0, fn)` 把菜单动作转回主线程 —— 那是 tkinter 的 API。
+旧界面版用 `root.after(0, fn)` 把菜单动作转回主线程 —— 那是旧工具链的 API。
 这里换成 Qt 的做法：托盘菜单回调（运行在 pystray 自己的线程里）只发信号，
 Qt 自动按 QueuedConnection 排到主线程执行，所以**不需要**手动加锁或 postEvent。
 
@@ -31,8 +31,8 @@ def available() -> bool:
 # 图标与通知
 # --------------------------------------------------------------------------
 # 这里**不**复用 Echo 的 `echo_launcher/ui/tray.py`：那个包的 `__init__.py`
-# 会 eagerly `from . import console, main_window`，进而 import tkinter ——
-# 在 PySide6 的 venv 里没有 tkinter，一 import 就崩。所以图标/通知在本模块内实现。
+# 会 eagerly `from . import console, main_window`，进而拉起旧界面模块 ——
+# 在 PySide6 的 venv 里没有那些旧模块，一 import 就崩。所以图标/通知在本模块内实现。
 #
 # 图标：直接渲染 `resources/echo_logo.svg` 的**完整形态**（`FRAME_FULL` —— 带白色圆角
 # 填充 + 描边，托盘/图标位正是它该出现的地方）。⛔ 不要再退回「蓝色圆环 + 橙点」那种自造方标

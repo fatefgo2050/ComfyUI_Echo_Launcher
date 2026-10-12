@@ -66,7 +66,7 @@ def logo_renderer(frame: str = FRAME_OUTLINE):
 class LogoBadge(QWidget):
     """Echo logo：渲染 `resources/echo_logo.svg`。
 
-    原版 logo 是**正方形**的 —— 圆角方块里放着 ECHO 字标（见 `core/brand.py` 的说明）。
+    logo 是**正方形**的 —— 圆角方块里放着 ECHO 字标（见 `core/brand.py` 的说明）。
     **别把它当成"就一排字标"**：那样方块的容器就没了（用户 2026-10-10 纠正过）。
     也**别自造方标**（曾经用「蓝环 + 橙点」顶替过，被要求删掉）。
 

@@ -39,7 +39,7 @@ DEFAULT_MODE = "默认模式"
 # 传别的（比如下拉里的「默认」）会让 ComfyUI 直接 parser.error 退出，代码 2。
 VERBOSE_LEVELS = ("DEBUG", "DETAIL", "INFO", "WARNING", "ERROR", "CRITICAL")
 
-# 启动器 UI 的 launch 段默认值（沿用 NOBU 启动器的语义）
+# 启动器 UI 的 launch 段默认值
 DEFAULT_LAUNCH = {
     "fp16_accumulation": True,
     "cuda_malloc": True,

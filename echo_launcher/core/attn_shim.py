@@ -5,7 +5,7 @@
 `core/attention.py` 负责在**本启动器自己拉起 ComfyUI** 时拼出
 `--use-sage-attention` / `--use-ck-attention`。但有些启动方式不受本启动器控制：
 
-  · 原版 TE 启动器（v7.2.1 根本没 CK 这个开关）
+  · 参考实现（v7.2.1 根本没 CK 这个开关）
   · 双击 `run_nvidia_gpu.bat` / `run_cpu.bat`
   · 任何手工 `python main.py ...`
 

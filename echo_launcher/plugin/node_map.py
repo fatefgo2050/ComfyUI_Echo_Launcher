@@ -135,7 +135,7 @@ class NodeMap:
         return s
 
     def search_by_node(self, keyword: str, comfyui_path: str = "") -> List[Tuple[str, str]]:
-        """按节点名关键字搜索（原版 VIP 功能，这里免费开放）。"""
+        """按节点名关键字搜索。"""
         kw = keyword.lower()
         out: List[Tuple[str, str]] = []
         if comfyui_path:

@@ -1,6 +1,6 @@
 """模型 / LoRA 管理器：扫描、查重、备注、Civitai 匹配缓存。
 
-沿用原版的表结构：
+沿用既有的表结构：
     notes(rel_path PK, text_note, image_rel_path, updated_at)
     file_hashes(rel_path PK, sha256, size, mtime, updated_at)
     civitai_matches(rel_path PK, sha256, status_code, fetched_at, model_id, version_id, ...)
@@ -139,7 +139,7 @@ class ModelManager:
         return {k: v for k, v in groups.items() if len(v) > 1}
 
     def duplicates_by_size(self, files: List[ModelFile]) -> Dict[int, List[ModelFile]]:
-        """免哈希的快速查重：先按大小分组（原版也是这个思路）。"""
+        """免哈希的快速查重：先按大小分组。"""
         groups: Dict[int, List[ModelFile]] = {}
         for f in files:
             groups.setdefault(f.size, []).append(f)

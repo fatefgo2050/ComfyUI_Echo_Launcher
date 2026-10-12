@@ -1,6 +1,6 @@
 """Python 环境维护页：**左边功能区，右边输出日志**。
 
-布局对齐 TE 启动器的「ComfyUI维护」页：左栏按功能分组，右栏是一整块输出日志。
+布局对齐「ComfyUI维护」页：左栏按功能分组，右栏是一整块输出日志。
 
     当前 Python 环境   路径（只读）+ 打开目录
     镜像源             PyPI 镜像下拉
@@ -588,7 +588,7 @@ class EnvPage(QWidget):
         tag = self.cuda_tag.currentText()
         ver = self.edit_torch_ver.text().strip()
         self._log(f">>> 安装 torch（{tag}{' ' + ver if ver else ''}）… 可能需要十几分钟")
-        # 用 *_stream 版：Echo 原版是 capture_output，要等十几分钟才一次性吐结果
+        # 用 *_stream 版：旧实现是 capture_output，要等十几分钟才一次性吐结果
         w = self.ctx.spawn(Worker(W.install_torch_stream, py, tag, ver,
                                   on_line=lambda s: self._log(s)))
 
@@ -617,7 +617,7 @@ class EnvPage(QWidget):
             return
         url = urls[0]
         self._log(f">>> 安装 {label}: {url}")
-        # 同上：走流式版，实时看进度（原版要等装完才吐结果）
+        # 同上：走流式版，实时看进度（旧实现要等装完才吐结果）
         w = self.ctx.spawn(Worker(W.install_url_stream, py, url,
                                   on_line=lambda s: self._log(s)))
 

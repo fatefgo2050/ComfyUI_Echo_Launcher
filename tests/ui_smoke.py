@@ -306,7 +306,7 @@ def main() -> int:
     # 条目标记「●」必须有样式：v8 只设了 objectName="Bullet"、QSS 里却一条规则都没有，
     # 圆点与正文同色 → 整页看不出条目标记。守住这条修复。
     assert "QLabel#Bullet" in style.QSS, "「关于」页的 #Bullet 没有 QSS 规则"
-    # 正文里不许再出现来源/原版说明（用户 2026-10-10：没必要写原版是 TE 启动器）
+    # 正文里不许再出现其它项目的来源说明（用户 2026-10-10 定的口径）
     for kw in ("NOBU", "tkinter", "TE模式", "原版", "复刻"):
         assert kw not in body, f"「关于」页正文不该再提「{kw}」"
     # 版式要点：正文必须**允许折行**（第一版把源码硬折行当成分段，句子半截断开）
@@ -405,7 +405,7 @@ def main() -> int:
         "LogoBadge 必须用 PlainBox 标记，否则全局底色会给它刷底"
     assert "QWidget#PlainBox { background: transparent; }" in style.QSS, \
         "style.py 里缺 QWidget#PlainBox { background: transparent; }"
-    # 两个「非原版」的旧实现都已按用户要求删除，别再冒出来：
+    # 两个旧实现都已按用户要求删除，别再冒出来：
     #   LogoMark     —— 我自己造的「蓝环 + 橙点」方标
     #   LogoWordmark —— 只有一排字标、丢了方块容器
     for gone in ("LogoMark", "LogoWordmark", "wordmark_renderer"):

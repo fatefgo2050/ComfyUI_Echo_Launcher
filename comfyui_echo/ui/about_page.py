@@ -29,7 +29,7 @@ v9.1 去掉 `page_header`（「品牌即页头」）→ **v10（现在，正文�
   ⚠ `wordWrap` 的 QLabel，`sizeHint()` 宽度是**废数** → 绝不能用布局去算宽度。
 - **容器一律 `plain_box()`**（否则被全局 `QWidget{background}` 刷出色带）；
   滚动区用 `QScrollArea#PlainScroll`（横向滚动条恒关）。
-- 正文一律左对齐；文案里**不许出现 NOBU / tkinter / TE模式 / 原版 / 复刻**（`ui_smoke` [10] 守着）。
+- 正文一律左对齐；文案里**不许出现其它启动器 / 工具链的名字**（`ui_smoke` [10] 守着）。
 - **增删节只改 `SECTIONS` 这张表**，版式不用动。
 """
 from __future__ import annotations

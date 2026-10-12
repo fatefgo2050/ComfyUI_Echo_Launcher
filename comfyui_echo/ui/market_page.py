@@ -56,7 +56,7 @@ class MarketPage(QWidget):
         btn_install = QPushButton("安装选中")
         btn_install.setObjectName("Primary")
         self.chk_node = QCheckBox("按节点名搜")
-        self.chk_node.setToolTip("改成按「工作流里的节点类名」反查插件（原版 VIP 功能）")
+        self.chk_node.setToolTip("改成按「工作流里的节点类名」反查插件")
         self.chk_reqs = QCheckBox("顺带装依赖")
         self.chk_reqs.setToolTip("装完插件后顺带跑 pip install -r requirements.txt")
         self.lbl_status = QLabel("")

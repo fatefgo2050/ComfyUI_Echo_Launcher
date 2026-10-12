@@ -15,7 +15,7 @@ Echo 的 `NodeMap.resolve()` / `search_by_node()` 把官方 `extension-node-map.
 `{"https://github.com/x/y": [["NodeA","NodeB"], {"title_aux": "y"}]}`）。
 按节点名去查必然查不中，所以 Echo 的「官方表兜底」实际上一直没生效。
 
-本模块按真实结构重建反查表（与 NOBU 启动器的 `build_remote_map` 一致），
+本模块按真实结构重建反查表，
 官方兜底才真正可用；写入的缓存文件格式不变，Echo 自己的界面照样能读。
 """
 from __future__ import annotations

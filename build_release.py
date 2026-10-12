@@ -82,7 +82,7 @@ QT_UNUSED = [
 
 # 运行时绝不碰的东西
 NEVER = [
-    "tkinter",                  # 界面是 PySide6；tkinter 只是 Echo 原版遗留
+    "tkinter",                  # 界面是 PySide6；旧图形工具链，运行时不加载
     "unittest", "pydoc", "doctest", "pdb", "pytest",
 ]
 

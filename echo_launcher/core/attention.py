@@ -1,8 +1,8 @@
 """注意力后端选择：SAGE / FLASH / CK（Comfy Kitchen INT8）。
 
-原版 TE 启动器只认 SAGE / FLASH 两档，没有 CK（其程序内`--use-ck-attention` /
-`ck_attention` / `comfy_kitchen` 三个关键字出现次数均为 0）。本模块让复刻版
-直接支持 CK —— 因为复刻版自己拼启动参数，不需要 sitecustomize 之类的 Hook。
+参考实现只认 SAGE / FLASH 两档，没有 CK（其程序内`--use-ck-attention` /
+`ck_attention` / `comfy_kitchen` 三个关键字出现次数均为 0）。本模块让本实现
+直接支持 CK —— 因为本实现自己拼启动参数，不需要 sitecustomize 之类的 Hook。
 
 四档取值
 --------

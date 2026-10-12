@@ -54,7 +54,7 @@ def search(keyword: str, limit: int = 200) -> list:
 
 
 def search_by_node(keyword: str, comfyui_path: str = "") -> list:
-    """按节点名搜插件（原版 VIP 功能，Echo 已解禁）。返回 [(节点名, 插件目录名)]"""
+    """按节点名搜插件。返回 [(节点名, 插件目录名)]"""
     out = []
     if comfyui_path:
         for node, plugin in _nm.build_local_map(_comfy_root_of(comfyui_path)).items():

@@ -1,6 +1,6 @@
 # ComfyUI Echo 启动器 —— 依赖清单
 #
-# 界面层（来自 NOBU 启动器）
+# 界面层
 PySide6>=6.6
 
 # Echo 功能层
@@ -13,5 +13,5 @@ pystray>=0.19
 win11toast>=0.30
 av>=11.0                # PyAV：视频解码与元数据
 
-# 注：ttkbootstrap 只是 Echo 原 tkinter 界面的依赖，
-# 合并后主界面是 PySide6，不再需要（echo_launcher/ui/ 已于 2026-10-12 删除）。
+# 注：ttkbootstrap 只是旧图形界面的依赖，
+# 主界面是 PySide6，不再需要（echo_launcher/ui/ 已于 2026-10-12 删除）。

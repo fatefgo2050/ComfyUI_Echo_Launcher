@@ -1,6 +1,6 @@
 """配置模型。
 
-键名沿用原版 launcher_config.json 的命名（保证与旧配置兼容），
+键名沿用既有 launcher_config.json 的命名（保证与旧配置兼容），
 但剔除了所有 VIP / 私有服务端相关的键。
 """
 from __future__ import annotations
