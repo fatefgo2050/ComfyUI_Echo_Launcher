@@ -26,6 +26,7 @@ def main() -> int:
         print(nodemap._SCAN_SENTINEL + json.dumps([mapping, failed]))
         return 0
 
+    from PySide6.QtCore import QLibraryInfo, QLocale, QTranslator
     from PySide6.QtGui import QIcon
     from PySide6.QtWidgets import QApplication
 
@@ -36,7 +37,18 @@ def main() -> int:
     app = QApplication(sys.argv)
     app.setApplicationName(APP_TITLE)
     # 注意：**不要** setApplicationDisplayName —— Windows 会把它拼到每个对话框标题后面，
-    # 变成「确认删除 - ComfyUI Echo 启动器 v0.1.0」。主窗口标题自己 setWindowTitle 即可。
+    # 变成「确认删除 - ComfyUI Echo 启动器 v0.1.1」。主窗口标题自己 setWindowTitle 即可。
+
+    # Qt 的官方中文翻译**必须显式加载**，否则 Qt 标准控件的文字全是英文 ——
+    # 行编辑右键菜单（撤销 / 复制 / 粘贴…）、QMessageBox 的 Yes/No、文件对话框都算。
+    # ⚠ Qt6 已把基础翻译合并进 `qt_zh_CN.qm`（Qt5 时代的 `qtbase_zh_CN` 已不存在），
+    #   所以是 load(..., "qt", "_", <translations 目录>)。
+    # ⚠ 必须留着这个引用（这里挂在 app 上）—— QTranslator 一旦被回收，翻译就失效。
+    qt_zh = QTranslator(app)
+    if qt_zh.load(QLocale(QLocale.Chinese, QLocale.China), "qt", "_",
+                  QLibraryInfo.path(QLibraryInfo.TranslationsPath)):
+        app.installTranslator(qt_zh)
+
     style.apply(app)
 
     # 图标复用 Echo 的资源（蓝底白字标）

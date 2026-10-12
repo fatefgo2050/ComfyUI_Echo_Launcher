@@ -8,7 +8,7 @@
 
 产物：
 
-    dist\\ComfyUI_Echo启动器.exe     单文件主程序
+    dist\\ComfyUI Echo启动器.exe     单文件主程序
     dist\\resources\\                 外置资源（便携 Git + 图标）
     dist\\build-report.xml           仅 Nuitka：本次构建打进了哪些模块（排查用）
 
@@ -24,6 +24,19 @@
 —— 左上角品牌字标 `resources/echo_wordmark.svg` 靠它渲染），其余 PySide6 模块
 （WebEngine 197M / qml / 3D / Multimedia / Designer / Charts / Pdf …）
 全部排除，避免把 639M 的 Qt 全家桶塞进产物。
+
+关于 Qt 翻译（.qm）——为什么 venv 里要"挪走"一大批
+----------------------------------------------------
+PySide6 的 `translations/` 有 305 个 `.qm`（15 MB，全语言），而 PyInstaller 的 Qt hook 是**按模块
+关联、把所有语言**一起收进去的（**没有语言开关**：`--exclude-module` 管不到数据文件）。
+本项目只用到中文 + 英文回退，所以把用不到的 278 个 `.qm` 挪去了
+`.workbuddy/backup/qt_translations_dropped/`（保留 `*_zh_CN.qm` / `*_en.qm`）——
+exe 随之从 86.6 MB 降到 84.8 MB（包内 `.qm` 96 → 6 个）。
+
+⚠ 两点：
+- Qt6 的 `qt_zh_CN.qm` 只是个**目录桩**（99 字节），真实内容在 `qtbase_zh_CN.qm`（147 KB）
+  —— 两个都要留，别只留前者。
+- **重装 / 升级 PySide6 后这些 .qm 会回来**（exe 又会变大）；按上面的规则再挪一次即可。
 
 关于 --tool nuitka
 ------------------
@@ -53,8 +66,8 @@ OUT_DIR = os.path.join(PROJECT, "dist")
 BUILD_DIR = os.path.join(PROJECT, "build")
 
 BUILD_NAME = "ComfyUI_Echo_Launcher"               # 构建用纯 ASCII 名（避开工具链编码问题）
-RELEASE_NAME = "ComfyUI_Echo启动器.exe"            # 交付名（构建后重命名）
-VERSION = "0.1.0"
+RELEASE_NAME = "ComfyUI Echo启动器.exe"            # 交付名（构建后重命名）
+VERSION = "0.1.1"
 COMPANY = "ComfyUI Echo"
 PRODUCT = "ComfyUI Echo 启动器"
 DESC = "ComfyUI Echo 启动器 - ComfyUI 多包启动 / 插件 / 模型 / 媒体管理"

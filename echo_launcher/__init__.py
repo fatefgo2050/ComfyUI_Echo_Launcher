@@ -129,4 +129,4 @@ if _is_frozen():
                     except OSError:
                         pass
 
-__version__ = "0.1.0"
+__version__ = "0.1.1"

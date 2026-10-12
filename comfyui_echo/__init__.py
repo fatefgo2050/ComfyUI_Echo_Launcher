@@ -12,7 +12,7 @@ UI 文件不改 import；换后端只动适配层即可。
 """
 import os
 
-__version__ = "0.1.0"
+__version__ = "0.1.1"
 APP_TITLE = "ComfyUI Echo 启动器"
 
 # 项目根目录（= Comfyui_Echo/）

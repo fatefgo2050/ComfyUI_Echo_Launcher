@@ -15,6 +15,7 @@
 from __future__ import annotations
 
 import os
+import tempfile
 
 from PySide6.QtCore import Qt, QTimer, QUrl
 from PySide6.QtGui import QDesktopServices
@@ -116,7 +117,8 @@ class SettingsPage(QWidget):
         self.edit_token.setEchoMode(QLineEdit.Password)
         self.edit_token.setPlaceholderText("ghp_xxx（只存本地，不写日志）")
         _row(g2, "GitHub Token", self.edit_token,
-             "未认证时 GitHub API 只有 60 次/小时，填了提到 5000 次/小时。")
+             "未认证时 GitHub API 只有 60 次/小时（共享代理出口常被用光）；"
+             "填了提到 5000 次/小时。留空也能用——检查更新会自动改直连兜底。")
         self.chk_ssl = QCheckBox("关闭 SSL 校验")
         _row(g2, "", self.chk_ssl, "仅在公司代理/自签证书环境临时开启。")
 
@@ -189,7 +191,7 @@ class SettingsPage(QWidget):
         """把配置灌进控件。**期间禁止自动保存** —— 否则灌值本身就会触发一轮写盘。"""
         self._loading = True
         try:
-            self.edit_repo.setText(cfgmod.get_echo("update_repo", "") or "")
+            self.edit_repo.setText(cfgmod.get_echo("update_repo", "") or SU.DEFAULT_REPO)
             self.edit_token.setText(cfgmod.get_echo("github_token", "") or "")
             self.chk_ssl.setChecked(bool(cfgmod.get_echo("disable_ssl_verify", False)))
             self.chk_tray.setChecked(bool(cfgmod.get_echo("enable_tray", True)))
@@ -236,13 +238,19 @@ class SettingsPage(QWidget):
             return
         self.save()
         self.ctx.status("正在检查 GitHub Releases…")
-        w = self.ctx.spawn(Worker(SU.latest_release, self._proxy()))
+        w = self.ctx.spawn(Worker(SU.latest_release_ex, self._proxy()))
 
-        def _done(rel):
+        def _done(res):
+            rel, err = res
             if rel is None:
                 self.ctx.status("检查更新失败")
-                QMessageBox.warning(self, "检查更新",
-                                    "拿不到 Release 信息（仓库不存在 / 无网络 / 无 Release）。")
+                QMessageBox.warning(
+                    self, "检查更新",
+                    "拿不到 Release 信息。\n\n"
+                    f"原因：{err or '未知'}\n\n"
+                    "排查：① 仓库地址是否为 owner/name；② 该仓库是否已发布 Release；"
+                    "③ 网络 / 代理是否可用。若代理可用仍失败，多为代理出口被 GitHub 限流"
+                    "——填本页「网络」栏的 GitHub Token 即可绕过。")
                 return
             if not SU.newer_than(rel.tag):
                 self.ctx.status(f"已是最新（{rel.tag}）")
@@ -264,8 +272,9 @@ class SettingsPage(QWidget):
         w.failed.connect(lambda m: QMessageBox.warning(self, "检查更新失败", m))
 
     def _download_and_apply(self, asset):
-        dest = os.path.join(os.path.dirname(SU.current_launch_cmd()[0]),
-                            asset.get("name") or "update.zip")
+        # ★ 下载到**系统临时目录**：旧实现落到 `dirname(current_launch_cmd()[0])`，
+        #   源码运行时那等于 `.venv\Scripts\`，会往那儿塞一个 100MB+ 的包。
+        dest = os.path.join(tempfile.gettempdir(), asset.get("name") or "update.zip")
         self.ctx.status(f"正在下载 {asset.get('name')} …")
         w = self.ctx.spawn(Worker(SU.download_asset, asset, dest, self._proxy()))
 
@@ -273,8 +282,17 @@ class SettingsPage(QWidget):
             if not path:
                 QMessageBox.warning(self, "下载失败", "下载更新包失败")
                 return
+            # ★ 覆盖目标只由 SU.app_dir() 决定：冻结态 = exe 所在那层；源码运行返回空串。
+            #   旧实现用 `dirname(dirname(__file__))` —— onefile 下那是 `%TEMP%\_MEI…`
+            #   （退出即删，等于没更新），源码运行时是项目根（会把源码糊上打包产物）。
+            target = SU.app_dir()
+            if not target:
+                QMessageBox.information(
+                    self, "更新",
+                    "当前是源码运行，没有可覆盖的安装目录。\n\n"
+                    "请改用 git pull 拉取新版本，或到「Releases 页面」手动下载免安装包。")
+                return
             self.ctx.status("下载完成，准备覆盖更新…")
-            target = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
             try:
                 SU.apply_archive(path, target)
                 self.ctx.status("更新脚本已启动，程序即将退出")

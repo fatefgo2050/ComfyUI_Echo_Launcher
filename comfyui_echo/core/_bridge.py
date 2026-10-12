@@ -63,11 +63,19 @@ def rescue():
     return _once("rescue", lambda: RescueManager(DATA_DIR))
 
 
-def http_client(proxy: str = "", token: str = "") -> HttpClient:
-    """按当前配置构造 HTTP 客户端（含私有域名拦截）。"""
+def http_client(proxy: str = "", token: str = "", direct: bool = False) -> HttpClient:
+    """按当前配置构造 HTTP 客户端（含私有域名拦截）。
+
+    ``direct=True`` 强制**不走代理** —— 供"代理不可用 / 被限流时改直连重试"使用。
+    注意不能靠传 `proxy=""` 来关代理：空串在这里是「未指定」，仍会回落到配置里的代理。
+    """
     c = config()
+    if direct:
+        p = ""
+    else:
+        p = proxy or (c.get("proxy_address") if c.get("enable_proxy") else "")
     return HttpClient(
-        proxy=proxy or (c.get("proxy_address") if c.get("enable_proxy") else ""),
+        proxy=p,
         verify_ssl=not c.get("disable_ssl_verify"),
         github_token=token or (c.get("github_token") or ""),
     )

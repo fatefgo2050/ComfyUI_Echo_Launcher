@@ -2,7 +2,7 @@
 
 用户要求：
   - 这些「小窗口」**不要那个蓝色问号图标**；
-  - 标题栏只显示短标题，**不要「- ComfyUI Echo 启动器 v0.1.0」后缀**
+  - 标题栏只显示短标题，**不要「- ComfyUI Echo 启动器 v0.1.1」后缀**
     （那串是 Windows 用 `applicationDisplayName` 拼上去的，`main.py` 已不再设置）。
 
 用法：页面里把导入换成

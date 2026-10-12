@@ -34,7 +34,7 @@ class HttpClient:
         self._session = requests.Session()
         self._session.trust_env = True
         self.set_proxy(proxy)
-        self._session.headers.update({"User-Agent": "Echo-Launcher/0.1.0"})
+        self._session.headers.update({"User-Agent": "Echo-Launcher/0.1.1"})
 
     def set_proxy(self, proxy: str) -> None:
         self.proxy = (proxy or "").strip()

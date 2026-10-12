@@ -43,22 +43,56 @@ def _version_tuple(tag: str):
     return tuple(int(x) for x in nums[:4]) or (0,)
 
 
-def latest_release(client: HttpClient, repo: str) -> Optional[Release]:
-    """repo 形如 owner/name。"""
+def latest_release_ex(client: HttpClient, repo: str):
+    """同 ``latest_release``，但**附带失败原因**（返回 ``(Release | None, 原因)``）。
+
+    旧实现把「非 200」和「抛异常」一律折叠成 ``None``，UI 只能笼统地报
+    「仓库不存在 / 无网络 / 无 Release」—— 用户没法知道到底卡在哪。这里把状态码
+    翻译成人话，尤其把 **403/429（未认证配额被用光）** 单独点出来：
+    GitHub API 未认证是「每 IP 60 次/小时」，**共享代理出口极易被别处用光**，
+    而这是自更新最常见的失败，和"仓库写错了"完全是两码事。
+    成功时原因是空串。
+    """
     url = f"{GITHUB_API}/repos/{repo}/releases/latest"
     try:
         r = client.get(url, timeout=20)
-        if r.status_code != 200:
-            return None
-        d = r.json()
+    except Exception as e:
+        return None, f"网络请求失败：{type(e).__name__}: {str(e)[:160]}"
+
+    code = r.status_code
+    if code == 200:
+        try:
+            d = r.json()
+        except Exception as e:
+            return None, f"响应不是合法 JSON：{str(e)[:120]}"
+        return Release(
+            tag=d.get("tag_name", ""),
+            name=d.get("name", "") or d.get("tag_name", ""),
+            notes=(d.get("body") or "")[:2000],
+            assets=d.get("assets") or [],
+        ), ""
+
+    detail = ""
+    try:
+        detail = str((r.json() or {}).get("message") or "")[:160]
     except Exception:
-        return None
-    return Release(
-        tag=d.get("tag_name", ""),
-        name=d.get("name", "") or d.get("tag_name", ""),
-        notes=(d.get("body") or "")[:2000],
-        assets=d.get("assets") or [],
-    )
+        pass
+
+    if code == 404:
+        return None, "仓库不存在，或该仓库还没有发布任何 Release（HTTP 404）"
+    if code in (403, 429):
+        if not getattr(client, "github_token", "") and "rate limit" in detail.lower():
+            return None, (f"GitHub API 未认证配额已用尽（HTTP {code}）：每 IP 每小时 60 次，"
+                          "共享代理出口常被别处用光。到「设置」页填一个 GitHub Token "
+                          "即可提到 5000 次/小时。")
+        return None, f"访问被拒绝（HTTP {code}）：{detail}"
+    return None, f"HTTP {code}" + (f"：{detail}" if detail else "")
+
+
+def latest_release(client: HttpClient, repo: str) -> Optional[Release]:
+    """repo 形如 owner/name。失败一律返回 None（保留旧契约，老调用方无感）。"""
+    rel, _err = latest_release_ex(client, repo)
+    return rel
 
 
 def newer_than(tag: str, current: str) -> bool:
@@ -88,12 +122,30 @@ def apply_archive(archive: str, target_dir: str, restart_cmd: List[str]) -> str:
     if len(entries) == 1 and os.path.isdir(os.path.join(tmp, entries[0])):
         inner = os.path.join(tmp, entries[0])
 
+    # 重启目标优先用**归档根层的 exe**：新版可能改了 exe 名（0.1.0 的
+    # `ComfyUI_Echo启动器.exe` → 0.1.1 的 `ComfyUI Echo启动器.exe`），
+    # 若还按旧的 restart_cmd 启动，拉起的就是那个没被覆盖的旧 exe。
+    restart_cmd = list(restart_cmd)
+    if getattr(sys, "frozen", False):
+        try:
+            exes = sorted(f for f in os.listdir(inner) if f.lower().endswith(".exe"))
+        except OSError:
+            exes = []
+        if exes:
+            restart_cmd = [os.path.join(target_dir, exes[0])]
+
     bat = os.path.join(tempfile.gettempdir(), "te_update.bat")
     restart = " ".join(f'"{c}"' for c in restart_cmd)
     with open(bat, "w", encoding="gbk", errors="ignore") as f:
         f.write("@echo off\n")
         f.write("timeout /t 2 /nobreak >nul\n")
         f.write(f'xcopy "{inner}\\*" "{target_dir}\\" /E /Y /Q\n')
+        # 删掉「不在新包里」的 exe：`xcopy /E /Y` **只覆盖、不删除**，而 0.1.0 -> 0.1.1
+        # 恰好改了 exe 名（下划线 -> 空格）—— 不清理的话新旧两个 exe 会并排躺着，用户会点错。
+        # 判定依据是新包解压目录里有没有同名文件（该目录下一行才 rd 掉，此刻还在）。
+        # 免安装目录按文档只放本程序的 exe + resources/，所以按 *.exe 清理是安全的。
+        f.write(f'for %%f in ("{target_dir}\\*.exe") do '
+                f'if not exist "{inner}\\%%~nxf" del /q "%%f"\n')
         f.write(f'start "" {restart}\n')
         f.write(f'rd /s /q "{tmp}"\n')
         f.write("del \"%~f0\"\n")

@@ -45,7 +45,7 @@ PYPI_MIRRORS: Dict[str, str] = {
     "腾讯云": "https://mirrors.cloud.tencent.com/pypi/simple/",
 }
 
-# 硬性拦截：确保重构后不会有任何请求打到原作者的私有域名
+# 硬性拦截：本项目不连任何私有服务端，下列域名一律拒绝访问
 BLOCKED_HOSTS = (
     "tetae.top",
     "588187.xyz",
