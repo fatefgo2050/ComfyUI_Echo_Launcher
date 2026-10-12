@@ -1,17 +1,37 @@
+<div align="center">
+
+<img src="resources/echo_logo.png" width="104" alt="ComfyUI Echo">
+
 # ComfyUI Echo 启动器
 
-纯本地运行的 **ComfyUI 管理面板**：在一台机器上管理多套 ComfyUI 环境，把**启动 / 插件 /
-工作流 / 模型 / 媒体 / 内核版本**这些日常运维收进一个窗口。
+**纯本地运行的 ComfyUI 管理面板**
 
-## 下载
+把 启动 · 插件 · 工作流 · 模型 · 媒体 · 内核版本 收进一个窗口
 
-| 文件 | 说明 |
-|---|---|
-| `ComfyUI_Echo_Launcher_v0.1.0_windows-x64.zip` | **免安装**：解压后双击 `ComfyUI Echo启动器.exe` 即可（无需安装 Python） |
-| Source code（zip / tar.gz） | GitHub 自动生成，或直接 `git clone` 本仓库 |
+[⬇ 下载免安装包](https://github.com/fatefgo2050/ComfyUI_Echo_Launcher/releases) &nbsp;·&nbsp; [主要功能](#主要功能) &nbsp;·&nbsp; [从源码运行](#从源码运行) &nbsp;·&nbsp; [目录结构](#目录结构)
 
-- 平台：**Windows 10 / 11（64 位）**。
-- 解压后 `ComfyUI Echo启动器.exe` 与 `resources/` **必须保持同级**，不要只把 exe 单独拷走。
+![platform](https://img.shields.io/badge/平台-Windows%2010%20%2F%2011-0078D4?logo=windows&logoColor=white)
+![python](https://img.shields.io/badge/Python-3.13-3776AB?logo=python&logoColor=white)
+![version](https://img.shields.io/badge/版本-v0.1.0-1f6c9f)
+![runtime](https://img.shields.io/badge/运行-解压即用%20·%20免装%20Python-346538)
+
+</div>
+
+---
+
+## 这是什么
+
+一台机器上往往有**多套 ComfyUI**：不同的整合包、不同的插件集、不同的 Python 环境。
+日常切换靠手动改名插件目录、手敲启动参数，很容易出错。
+
+**ComfyUI Echo 启动器**把这些收进一个窗口：多包路径统一管理、按工作流切换插件集、
+启动参数可视化、插件与内核的安装更新、模型与媒体的浏览整理 —— 全部**在本机完成**，
+不依赖任何私有服务端。
+
+<div align="center">
+<img src="docs/screenshots/home.png" width="900" alt="启动页">
+<br><em>启动 —— 多包路径 · 启动参数 · 注意力四档 · 实时控制台</em>
+</div>
 
 ## 主要功能
 
@@ -28,6 +48,31 @@
 | 系统 | 环境 | pip 包与重型轮子（torch / SageAttention / xFormers …）、环境快照与还原 |
 | 系统 | 设置 | 自更新仓库 / Token / 托盘 / 通知 |
 | 系统 | 关于 | 软件介绍与版本更新 |
+
+<div align="center">
+<img src="docs/screenshots/modes.png" width="900" alt="模式页">
+<br><em>模式 —— 工作流 / 插件 / 当前模式一屏三栏，选工作流即知缺哪些插件</em>
+</div>
+
+<div align="center">
+<img src="docs/screenshots/market.png" width="900" alt="市场页">
+<br><em>市场 —— ComfyUI-Manager 公开目录，边打边过滤、按节点名反查</em>
+</div>
+
+<div align="center">
+<img src="docs/screenshots/settings.png" width="900" alt="设置页">
+<br><em>设置 —— 自更新 / 网络 / 界面与系统偏好，改动即时保存</em>
+</div>
+
+## 下载
+
+| 文件 | 说明 |
+|---|---|
+| `ComfyUI_Echo_Launcher_v0.1.0_windows-x64.zip` | **免安装**：解压后双击 `ComfyUI Echo启动器.exe` 即可（无需安装 Python） |
+| Source code（zip / tar.gz） | GitHub 自动生成，或直接 `git clone` 本仓库 |
+
+- 平台：**Windows 10 / 11（64 位）**。
+- 解压后 `ComfyUI Echo启动器.exe` 与 `resources/` **必须保持同级**，不要只把 exe 单独拷走。
 
 ## 从源码运行
 
@@ -73,4 +118,4 @@ build_release.py     打包发布版
 
 ## 版本
 
-本仓库对应 **v0.1.0**（tag `v0.1.0`）。更新记录见「关于」页与 Releases。
+本仓库对应 **v0.1.0**（tag `v0.1.0`）。更新记录见「关于」页与 [Releases](https://github.com/fatefgo2050/ComfyUI_Echo_Launcher/releases)。
