@@ -37,7 +37,7 @@
 
 <div align="center">
   <img src="docs/screenshots/home.png" width="900" alt="启动页">
-  <br><em>启动 —— 多包路径 · 启动参数 · 注意力四档 · 实时控制台</em>
+  <br><em>启动 —— 多包路径 · 启动参数 · 实时控制台</em>
 </div>
 
 ## 主要功能
@@ -59,18 +59,18 @@
 <br>
 
 <div align="center">
-  <img src="docs/screenshots/modes.png" width="900" alt="模式页">
-  <br><em>模式 —— 工作流 / 插件 / 当前模式一屏三栏，选工作流即知缺哪些插件</em>
-</div>
-
-<div align="center">
-  <img src="docs/screenshots/market.png" width="900" alt="市场页">
-  <br><em>市场 —— ComfyUI-Manager 公开目录，边打边过滤、按节点名反查</em>
+  <img src="docs/screenshots/expert.png" width="900" alt="专家模式页">
+  <br><em>专家模式 —— 精度 / 显存 / 日志 / 注意力接管，逐项对应命令行开关</em>
 </div>
 
 <div align="center">
   <img src="docs/screenshots/settings.png" width="900" alt="设置页">
   <br><em>设置 —— 自更新 / 网络 / 界面与系统偏好，改动即时保存</em>
+</div>
+
+<div align="center">
+  <img src="docs/screenshots/about.png" width="900" alt="关于页">
+  <br><em>关于 —— 软件介绍与版本更新</em>
 </div>
 
 ## 下载
