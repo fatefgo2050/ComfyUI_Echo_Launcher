@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="resources/echo_logo.png" width="104" alt="ComfyUI Echo">
+  <img src="resources/echo_logo_badge.png" width="100" alt="ComfyUI Echo">
   <h1>ComfyUI Echo 启动器</h1>
   <p>
     <strong>纯本地运行的 ComfyUI 管理面板</strong><br>
