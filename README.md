@@ -59,6 +59,18 @@
 <br>
 
 <div align="center">
+  <img src="docs/screenshots/modes.png" width="900" alt="模式页（首次启动空态）">
+  <br><em>模式 —— 工作流 / 插件 / 当前模式一屏三栏，选工作流即知缺哪些插件<br>
+  （图为<strong>首次启动的空态</strong>：在「启动」页选好包路径后，左栏会列出你的工作流、中栏高亮它需要的插件）</em>
+</div>
+
+<div align="center">
+  <img src="docs/screenshots/market.png" width="900" alt="市场页（尚未拉取目录的空态）">
+  <br><em>市场 —— ComfyUI-Manager 公开目录，边打边过滤、按节点名反查<br>
+  （图为<strong>尚未拉取目录的空态</strong>：点右上角「刷新目录」即可加载公开插件列表）</em>
+</div>
+
+<div align="center">
   <img src="docs/screenshots/expert.png" width="900" alt="专家模式页">
   <br><em>专家模式 —— 精度 / 显存 / 日志 / 注意力接管，逐项对应命令行开关</em>
 </div>
