@@ -17,7 +17,7 @@
   <p>
     <img src="https://img.shields.io/badge/%E5%B9%B3%E5%8F%B0-Windows%2010%20%2F%2011-0078D4?logo=windows&logoColor=white" alt="platform">
     <img src="https://img.shields.io/badge/Python-3.13-3776AB?logo=python&logoColor=white" alt="python">
-    <img src="https://img.shields.io/badge/%E7%89%88%E6%9C%AC-v0.1.0-1f6c9f" alt="version">
+    <img src="https://img.shields.io/badge/%E7%89%88%E6%9C%AC-v0.1.1-1f6c9f" alt="version">
     <img src="https://img.shields.io/badge/%E8%BF%90%E8%A1%8C-%E8%A7%A3%E5%8E%8B%E5%8D%B3%E7%94%A8%20%C2%B7%20%E5%85%8D%E8%A3%85%20Python-346538" alt="runtime">
   </p>
 </div>
@@ -79,7 +79,7 @@
 
 | 文件 | 说明 |
 |---|---|
-| `ComfyUI_Echo_Launcher_v0.1.0_windows-x64.zip` | **免安装**：解压后双击 `ComfyUI Echo启动器.exe` 即可（无需安装 Python） |
+| `ComfyUI_Echo_Launcher_v0.1.1_windows-x64.zip` | **免安装**：解压后双击 `ComfyUI Echo启动器.exe` 即可（无需安装 Python） |
 | Source code（zip / tar.gz） | GitHub 自动生成，或直接 `git clone` 本仓库 |
 
 - 平台：**Windows 10 / 11（64 位）**。
@@ -129,4 +129,4 @@ build_release.py     打包发布版
 
 ## 版本
 
-本仓库对应 **v0.1.0**（tag `v0.1.0`）。更新记录见「关于」页与 [Releases](https://github.com/fatefgo2050/ComfyUI_Echo_Launcher/releases)。
+本仓库对应 **v0.1.1**（tag `v0.1.1`）。更新记录见「关于」页与 [Releases](https://github.com/fatefgo2050/ComfyUI_Echo_Launcher/releases)。
